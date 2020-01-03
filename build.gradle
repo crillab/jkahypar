@@ -1,0 +1,44 @@
+/*
+ * This is the build.gradle configuration file of JKaHyPar.
+ */
+
+/************************
+ * Global Configuration *
+ ************************/
+
+// Declaring the properties common to all projects.
+allprojects {
+    apply plugin: "eclipse"
+
+    group = "fr.univartois.cril.jkahypar"
+    version = "0.1.0"
+}
+
+/*********
+ * Tasks *
+ *********/
+
+// Creating the shared library of KaHyPar.
+task makeSharedLibrary {
+    dependsOn "native-kahypar:dist"
+}
+
+// Executing the tests of the Java implementation.
+task test {
+    dependsOn "java-wrapper:test"
+    dependsOn "java-wrapper:jacocoTestReport"
+}
+
+// Creating the binary distribution of JKaHyPar.
+task jars {
+    dependsOn "java-wrapper:jar"
+    dependsOn "java-wrapper:dist"
+}
+
+// Cleaning the build files.
+task clean {
+    subprojects.each {
+        dependsOn "${it.name}:clean"
+    }
+    delete "dist"
+}

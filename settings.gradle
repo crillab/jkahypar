@@ -1,0 +1,10 @@
+/*
+ * This is the settings.gradle configuration file of JKaHyPar.
+ */
+
+// Declaring the name of the project.
+rootProject.name = "JKaHyPar"
+
+// Declaring the sub-projects.
+include "native-kahypar",
+        "java-wrapper"

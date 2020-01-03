@@ -1,0 +1,116 @@
+/*
+ * This is the build.gradle configuration file of the java-wrapper
+ * for KaHyPar.
+ */
+
+/************************
+ * Module Configuration *
+ ************************/
+
+apply plugin: "java"
+apply plugin: "jacoco"
+
+ext.moduleName = "fr.univartois.cril.jkahypar"
+
+/****************
+ * Dependencies *
+ ****************/
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation "net.java.dev.jna:jna:5.5.0"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.5.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.5.1"
+}
+
+/*************************
+ * Eclipse Configuration *
+ *************************/
+
+eclipse.classpath.file.whenMerged {
+    // Modularizing project dependencies.
+    entries.findAll{ isModule(it) }.each{ it.entryAttributes["module"] = "true" }
+}
+
+/****************************************
+ * Compilation Configuration for Jigsaw *
+ ****************************************/
+
+afterEvaluate {
+    compileJava {
+        // Setting the module name.
+        inputs.property("moduleName", moduleName)
+
+        // Adding the classpath to the module path.
+        doFirst {
+            options.compilerArgs = [
+                "--module-path", classpath.asPath
+            ]
+            classpath = files()
+        }
+    }
+}
+
+/**********************
+ * Test Configuration *
+ **********************/
+
+// Making test resources available during test execution.
+task copyTestResources(type: Copy) {
+    from "${projectDir}/src/test/resources"
+    into "${buildDir}/classes/java/test"
+}
+processTestResources.dependsOn copyTestResources
+
+// Configuring the use of JUnit 5.
+test {
+    useJUnitPlatform()
+}
+
+// Configuring the version of JaCoCo to use.
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+// Asking for an XML output for JaCoCo.
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
+/*************
+ * Packaging *
+ *************/
+
+// Putting the modular JAR in the distribution directory.
+tasks.withType(Jar) {
+    archiveBaseName = "jkahypar-module"
+    destinationDirectory = file("${rootDir}/dist")
+}
+
+// Creating a fat JAR with all dependencies.
+task dist(type: Jar) {
+    archiveBaseName = "jkahypar"
+    with jar
+
+    from {
+        configurations.compileClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
+
+/*************
+ * Functions *
+ *************/
+
+// Checking whether an Eclipse classpath entry must be put in the module path.
+boolean isModule(entry) {
+    (entry.kind == "src") || ((entry.kind == "lib") && (entry.entryAttributes["gradle_used_by_scope"] != "test"))
+}

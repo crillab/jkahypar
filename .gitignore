@@ -1,0 +1,15 @@
+# Gradle Cache.
+.gradle
+
+# Eclipse Configuration.
+.classpath
+.project
+.settings
+
+# Output Directories.
+bin
+build
+dist
+
+# Miscellaneous.
+.DS_Store
