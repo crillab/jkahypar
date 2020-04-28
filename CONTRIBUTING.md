@@ -16,7 +16,7 @@ If you want to contribute, you first need to *fork* this project, and to clone
 your fork on your computer, by using a command similar to the following.
 
 ```bash
-git clone https://gitlab.univ-artois.fr/wallon-phd/softwares/jkahypar.git
+git clone https://github.com/crillab/jkahypar.git
 ```
 
 Once this is done, open a terminal in the `jkahypar` directory and tell Gradle
