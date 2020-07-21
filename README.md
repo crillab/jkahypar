@@ -8,7 +8,7 @@ hypergraph partitioning framework.
 This library consists of a Java module named `fr.univartois.cril.jkahypar`,
 which provides an object-oritented interface for building and partitioning
 hypergraphs.
-Under the box, [Java Native Access](https://github.com/java-native-access/jna)
+Under the hood, [Java Native Access](https://github.com/java-native-access/jna)
 is used for invoking the native implementation provided by KaHyPar
 (currently, only **Linux** and **macOS** are supported).
 
@@ -25,6 +25,16 @@ Go [there](java-wrapper) to see how to build the Java library.
 
 The library provides an interface for easily handling hypergraphs.
 The following section describes how to use its various features.
+
+> **Important Note**
+>
+> Despite JKaHyPar is a *modular* library, you may also need to add its JAR to
+> the classpath when using it within another application, so as to allow to
+> dynamically load the native library it contains (JNA does not look into the
+> modulepath for such libraries).
+> A possible alternative consists in specifying manually the location of the
+> library (e.g., from [this directory](java-wrapper/src/main/resources/)), but
+> this approach is much less convenient in practice.
 
 ### Creating a Hypergraph
 

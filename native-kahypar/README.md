@@ -5,7 +5,7 @@ implementation of [KaHyPar](https://github.com/SebastianSchlag/kahypar) to
 make easier the packaging of JKaHyPar for different platforms.
 
 To build the library, you need to make sure that you get it with all its
-dependencies, by executing the following command:
+dependencies, by executing the following command from within this directory:
 
 ```bash
 git submodule update --recursive --remote --init

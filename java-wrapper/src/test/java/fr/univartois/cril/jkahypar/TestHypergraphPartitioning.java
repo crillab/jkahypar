@@ -44,7 +44,7 @@ public final class TestHypergraphPartitioning {
     public void testComputePartition() {
         try (var context = new KahyparContext()) {
             // Configuring the context.
-            context.configureFrom("src/test/resources/config/km1_direct_kway_sea18.ini");
+            context.configureFrom("src/test/resources/config/cut_kKaHyPar_sea20.ini");
             context.setImbalance(0.03);
             context.setNumberOfBlocks(2);
 

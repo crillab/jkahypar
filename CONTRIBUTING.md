@@ -33,15 +33,12 @@ Do not forget to check the *Search for nested project* box.
 ## New Features
 
 When using this library, you may miss some features.
-You can submit a *feature request* or a *merge request* for them.
-
-Note that new features have to be useful for most of the users, and should not
-introduce (too many) breaking changes.
+You can submit a *feature request* or a *pull request* for them.
 
 ### Submitting a Feature Request
 
 You can submit a feature request by writing an issue tagged with the label
-**Feature Request**.
+**enhancement**.
 In this issue, try to describe *precisely* what you want, by using examples if
 possible.
 
@@ -54,22 +51,22 @@ Otherwise, we will try to find a solution for your particular use case.
 
 You may also want to implement the features you miss.
 If you want to share your implementation, you will need to *fork* this project
-and to submit a *merge request*.
+and to submit a *pull request*.
 
-When writing the merge request, try to describe *precisely* what you have
+When writing the pull request, try to describe *precisely* what you have
 implemented.
 If the feature was initially submitted as a feature request, specify also the
 corresponding issue using `#X`, where `X` is the number of the issue.
 
-We will only accept merge requests satisfying the following conditions:
+We will only accept pull requests satisfying the following conditions:
 
 + The feature you implemented is properly documented to help people understand
   how to use it.
 + You have written some tests for your feature, either by completing the
-  existing ones, or by providing your owns.
+  existing ones, or by providing your own.
 + No breaking changes are introduced, unless your feature requires them.
-+ Your implementation is easily readable, and does not trigger any linter
-  warning.
++ Your implementation is easily readable, and does not trigger any avoidable
+  linter warning.
 
 If one of these conditions is not satisfied, you will be asked to apply the
 changes required to satisfy it.
@@ -88,7 +85,7 @@ While using this library, you may find bugs that you may want to either
 
 ### Reporting a Bug
 
-To report a bug, just submit an issue tagged with the label **Bug**.
+To report a bug, just submit an issue tagged with the label **bug**.
 
 Try to describe as precisely as possible the problem you have encountered.
 In particular, we need the following information:
@@ -101,12 +98,12 @@ bug you have identified.
 
 ### Fixing a Bug
 
-You may also fix the bug yourself, and submit a *merge request* with your fix.
+You may also fix the bug yourself, and submit a *pull request* with your fix.
 
 Before writing the fix, ask yourself whether the bug you identified is actually
 a bug.
 If you are not sure, prefer submitting a bug report first.
-Otherwise, we will reject the merge request.
+Otherwise, we will reject the pull request.
 
 When submitting the request, start by describing the bug you have fixed.
 If this bug has already been reported, specify the corresponding issue using
@@ -114,12 +111,13 @@ If this bug has already been reported, specify the corresponding issue using
 Otherwise, describe in your message the bug you have fixed, as for a bug
 report.
 
-The conditions for your merge request to be accepted are the following:
+The conditions for your pull request to be accepted are the following:
 
 + Again, the bug you fixed is indeed a bug.
 + Unless unavoidable, no breaking changes are introduced.
 + You have written some non-regression tests for your fix.
-+ Your fix is easily readable, and does not trigger any linter warning.
++ Your fix is easily readable, and does not trigger any avoidable linter
+  warning.
 
 If one of these conditions is not satisfied, you will be asked to apply the
 changes required to satisfy it.
