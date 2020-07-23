@@ -4,4 +4,4 @@ jdk:
     - openjdk11
 script:
     - git submodule update --remote --init --recursive
-    - ./gradlew clean test --stacktrace
+    - ./gradlew clean test --debug
