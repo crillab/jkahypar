@@ -75,7 +75,6 @@ test {
         exceptionFormat = "full"
     }
 }
-}
 
 // Configuring the version of JaCoCo to use.
 jacoco {
