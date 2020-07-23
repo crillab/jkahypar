@@ -1,0 +1,15 @@
+dist: bionic
+language: java
+jdk:
+    - openjdk11
+addons:
+    artifacts:
+        paths:
+            - dist/*.jar
+    sonarcloud:
+        organization: cril
+        token:
+            secure: MYAWESOMETOKENFROMMANUHERE
+script:
+    - git submodule update --remote --init --recursive
+    - ./gradlew clean test
