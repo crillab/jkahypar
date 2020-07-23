@@ -1,5 +1,7 @@
 # JKaHyPar
 
+[![Build Status](https://travis-ci.org/crillab/jkahypar.svg?branch=master)](https://travis-ci.org/crillab/jkahypar)
+
 ## Description
 
 This project provides a Java binding for the [KahyPar](https://kahypar.org/)
