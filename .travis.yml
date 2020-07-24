@@ -14,9 +14,10 @@ addons:
         paths:
             - dist/*.jar
     sonarcloud:
-        organization: cril
+        organization: "cril"
         token:
-            secure: $SONAR_TOKEN
+            secure: "d39t6+53P/CgMkWGab6c4IyNgqJinSJ+zmomgl3/xuhO7B+CXq/IoWq6SAFLue1Nv+Q700p7o7uNjfy36y8Ym6YcLZ/EljAodPwGGD0agS97FygW6RxRWcDbgKHCgju7adKFyaZoNK/Q6UKvRxbpOZnXtdq2/ajFWY4yR6Q1nfl//z3WSUSAx0uJC1SjkZ9DnaOS46v3KxquUe0b0RZclbkmMn026lhhXUwskB6azEfneXz6TNRnv1AWYSYoWWFf4edCio5MpBSvmDvtWsprcDFJ1hLFZ+sjEh7Yk8KgciOVi5UD0m8o0jHoPMLPFZNqM7zFf5gv7QG7/HNZJi5/Z61WGNpsHpbWctdeCXSjQNTjQZfo1ctBUOwEWk2ncavGJxQLfUhBTu1MQu3D2Bqfw8L0KcYbMXcoGeoDBHiND9IDJCoXRbiF98K/I6gmewavemsePtEejU4mQda5DPdFB8/81MYfEcSzRY/qqg3zxcr2DdIBfvildIDDeDc2I4UbPM4t7zCTweJW22jHzhHeg7z1oRtEVDMjLyk6AvSMpkrU8M3e/7x98kP/dW/rdrNEeX4p0iDYSqXZCMVROPLDoh5B5YelGAav73TEMHnQSwPBEKcMILaPQDKVy0YXb6ZktBuT7taJJCn0fMCMOHSAfbHcy+TqcOdQ3Waxq2+UkY8="
+
 
 jobs:
     include:
