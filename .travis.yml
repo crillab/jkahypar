@@ -13,6 +13,10 @@ addons:
     artifacts:
         paths:
             - dist/*.jar
+    sonarcloud:
+        organization: cril
+            token:
+                secure: $SONAR_TOKEN
 
 jobs:
     include:
@@ -20,3 +24,5 @@ jobs:
           script: ./gradlew clean test jacocoTestReport
         - stage: package
           script: ./gradlew jars
+        - stage: sonar
+          script: sonar-scanner
