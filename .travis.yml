@@ -22,11 +22,12 @@ jobs:
     include:
         - stage: test
           script:
-              - ./gradlew clean test jacocoTestReport
+              - ./gradlew clean test 
         - stage: package
           script:
-              - ./gradlew jars
+              - ./gradlew clean ars
         - stage: sonar
           script:
-              - ./gradlew compileJava
+              - ./gradlew clean test jacocoTestReport
               - sonar-scanner
+
