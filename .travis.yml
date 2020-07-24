@@ -15,8 +15,8 @@ addons:
             - dist/*.jar
     sonarcloud:
         organization: cril
-            token:
-                secure: $SONAR_TOKEN
+        token:
+            secure: $SONAR_TOKEN
 
 jobs:
     include:
