@@ -26,7 +26,7 @@ project.
 
 ## Executing the Tests
 
-If you want to execute JKaHyPar's test, run the following command:
+If you want to execute JKaHyPar's tests, run the following command:
 
 ```bash
 ../gradlew test

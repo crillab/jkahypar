@@ -1,7 +1,7 @@
 /**
  * The {@code fr.univartois.cril.jkahypar} module provides a partitioning tool
  * for hypergraphs based on the native implementation proposed in
- * <a href="https://github.com/SebastianSchlag/kahypar">KaHyPar</a>.
+ * <a href="https://github.com/kahypar/kahypar">KaHyPar</a>.
  *
  * @author Romain WALLON
  * @version 0.1.0

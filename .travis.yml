@@ -28,6 +28,5 @@ jobs:
               - ./gradlew clean jars
         - stage: sonar
           script:
-              - ./gradlew clean test jacocoTestReport
+              - ./gradlew clean test
               - sonar-scanner
-

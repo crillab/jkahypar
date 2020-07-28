@@ -1,10 +1,11 @@
 # JKaHyPar
 
 [![Build Status](https://travis-ci.org/crillab/jkahypar.svg?branch=master)](https://travis-ci.org/crillab/jkahypar)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=crillab%3Ajkahypar&metric=alert_status)](https://sonarcloud.io/dashboard?id=crillab%3Ajkahypar)
 
 ## Description
 
-This project provides a Java binding for the [KahyPar](https://kahypar.org/)
+This project provides a Java binding for the [KaHyPar](https://kahypar.org/)
 hypergraph partitioning framework.
 
 This library consists of a Java module named `fr.univartois.cril.jkahypar`,
@@ -13,6 +14,20 @@ hypergraphs.
 Under the hood, [Java Native Access](https://github.com/java-native-access/jna)
 is used for invoking the native implementation provided by KaHyPar
 (currently, only **Linux** and **macOS** are supported).
+
+### Requirements
+
+To use JKaHyPar, you need to have [Boost](https://www.boost.org) installed
+on your computer.
+If you want to use the bundled shared library of KaHyPar, make sure to install
+the version of Boost that has been used to compile this library for your OS,
+as described below:
+
++ For **Linux**, use the version **1.73** of Boost.
++ For **macOS**, use the version **1.72** of Boost.
+
+If you use a different OS or a different version of Boost, you may need to
+recompile the shared library, and rebuild JKaHyPar.
 
 ## Building the Library
 
@@ -25,25 +40,27 @@ Go [there](java-wrapper) to see how to build the Java library.
 
 ## Using the Library
 
-The library provides an interface for easily handling hypergraphs.
-The following section describes how to use its various features.
+To use JKaHyPar, you need to declare its module `fr.univartois.cril.jkahypar`
+as a requirement in your `module-info.java`, and put its JAR on the
+*modulepath*.
 
-> **Important Note**
->
-> Despite JKaHyPar is a *modular* library, you may also need to add its JAR to
-> the classpath when using it within another application, so as to allow to
-> dynamically load the native library it contains (JNA does not look into the
-> modulepath for such libraries).
-> A possible alternative consists in specifying manually the location of the
-> library (e.g., from [this directory](java-wrapper/src/main/resources/)), but
-> this approach is much less convenient in practice.
+You may also need to put this JAR on the *classpath* when using it within
+another application, so as to allow to dynamically load the native library it
+contains (JNA does not look into the modulepath for such libraries).
+A possible alternative consists in specifying manually the location of the
+library (e.g., from [this directory](java-wrapper/src/main/resources/)), but
+this approach is much less convenient in practice.
+
+Once your path is properly set, you can use JKaHyPar to create hypergraphs
+and compute partitions thereof.
+The following section describes how to use these various features.
 
 ### Creating a Hypergraph
 
 The `HypergraphBuilder` allows to easily create your hypergraphs, which may
-have weight on their hyperedges or vertices, or both.
+have weights on their hyperedges or vertices, or both.
 
-The following example show how to create the hypergraph on page 12 in the
+The following example shows how to create the hypergraph on page 12 in the
 [hMetis manual](http://glaros.dtc.umn.edu/gkhome/fetch/sw/hmetis/manual.pdf).
 
 ```java
@@ -67,8 +84,8 @@ var hypergraph = createHypergraph(nbVertices, nbHyperedges)
 // Do something with hypergraph.
 ```
 
-Note that the methods `createHypergraph` and `joining` are imported from the
-classes `HypergraphBuilder` and `UnweightedHyperedge`, respectively.
+Note that the methods `createHypergraph` and `joining` are statically imported
+from the classes `HypergraphBuilder` and `UnweightedHyperedge`, respectively.
 
 You may also read a graph from a file written using the hMetis format (page 11
 of [its manual](http://glaros.dtc.umn.edu/gkhome/fetch/sw/hmetis/manual.pdf)).
