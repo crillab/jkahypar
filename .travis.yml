@@ -10,9 +10,6 @@ install:
     - sudo apt-get -y install libboost1.73-dev
 
 addons:
-    artifacts:
-        paths:
-            - dist/*.jar
     sonarcloud:
         organization: "cril"
         token:
@@ -23,10 +20,18 @@ jobs:
         - stage: test
           script:
               - ./gradlew clean test 
-        - stage: package
-          script:
-              - ./gradlew clean jars
         - stage: sonar
           script:
               - ./gradlew clean test
               - sonar-scanner
+        - stage: deploy
+          script:
+              - ./gradlew clean jars
+          deploy:
+              provider: releases
+              api_key:
+                  secure: "j72+go5Rmpn8++wljg73/tCM2QwU5v83SI0RbQMXWMVfA9TEKksNZQViuo4+58un+Efdjj+rR8R3oY6OwFK57mcaFPqpc0lgpJSJ0KKzppsfIVvZRevxFs+zFqH89Er1Ul5kqq6aeMN84gehtyd3frrStDUsV33rdvqQ6u+GJn0dutjwruBMK+qC02lHKZS94ZqpQTW5QjfRdBa8h2O9c0lqNXKJNOhCl1GPJBOKzoWXwkBs4DN/Mw5sk7c1TdQu0b27WJ6cs/is6gSkELnFXM33YM5S3b6Y/EM181rJPpJaWfKntICTX96Giiytfl5qECxYq+4b/Yz8J8+kzGpSXv2FdZxzlVz5WFvsSAMVaz57s1zf7x4iCfx6MGOfv75HrsuFtum6rklJhT2iO7pqnDwl1hS8HFMueXbeUaTENTT4TWPYevlka4q1m9XXkPFp321uNLIF+6BtXMG2CEb53F7Ei47JRLoqVxSSnoxKQ3pQ/FrmG7wouIxCdGUWiYnKEZZ6Yxnn1hznTzmoEqc+bpgWq5ZKtIxGTyJEpvIAswvspnQHNVJyxKLGAsY5xsrav5kpeyZBIoIeuYDQOQ5biItPxiFM/BoNQlsTQFjmtp2k+UxEMONN7vwIKIYQQZBsz+8McxOUXkau2PZ5MNZwwH1AY9GrGqW4V3vdQ2/zE9A="
+              file: dist/jkahypar-module-0.1.0.jar
+              skip_cleanup: true
+              on:
+                  tags: true
