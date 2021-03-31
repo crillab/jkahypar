@@ -43,7 +43,7 @@ task cmake(type: Exec) {
     }
 
     workingDir "build"
-    commandLine "cmake", "../kahypar"
+    commandLine "cmake", "../kahypar", "-DCMAKE_BUILD_TYPE=RELEASE"
 }
 
 // Executes 'make' for building the KaHyPar shared library.
