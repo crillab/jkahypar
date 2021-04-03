@@ -25,7 +25,7 @@ package fr.univartois.cril.jkahypar.hypergraph;
  * format, as a template method.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ * @version 0.2.0
  */
 abstract class AbstractHypergraph implements Hypergraph {
 
@@ -39,7 +39,7 @@ abstract class AbstractHypergraph implements Hypergraph {
      *
      * @param hmetisFormat The format of this hypergraph.
      */
-    public AbstractHypergraph(HmetisFormat hmetisFormat) {
+    protected AbstractHypergraph(HmetisFormat hmetisFormat) {
         this.hmetisFormat = hmetisFormat;
     }
 
