@@ -20,13 +20,9 @@ is used for invoking the native implementation provided by KaHyPar
 To use JKaHyPar, you need to have [Boost](https://www.boost.org) installed
 on your computer.
 If you want to use the bundled shared library of KaHyPar, make sure to install
-the version of Boost that has been used to compile this library for your OS,
-as described below:
+the version **1.79.0** of Boost, which has been used to compile this library.
 
-+ For **Linux**, use the version **1.73** of Boost.
-+ For **macOS**, use the version **1.72** of Boost.
-
-If you use a different OS or a different version of Boost, you may need to
+If you use an unsupported OS or a different version of Boost, you may need to
 recompile the shared library, and rebuild JKaHyPar.
 
 ## Building the Library
