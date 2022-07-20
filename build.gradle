@@ -10,7 +10,7 @@
 allprojects {
     apply plugin: "eclipse"
 
-    group = "fr.univartois.cril.jkahypar"
+    group = "fr.cril"
     version = "0.2.0"
 }
 

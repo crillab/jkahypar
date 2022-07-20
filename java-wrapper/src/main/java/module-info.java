@@ -4,7 +4,8 @@
  * <a href="https://github.com/kahypar/kahypar">KaHyPar</a>.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 
 module fr.univartois.cril.jkahypar {

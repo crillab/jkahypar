@@ -11,17 +11,18 @@
 def distDir = "${rootDir}/dist"
 def jkahyparDir = "${rootDir}/java-wrapper/src/main/resources"
 def platform = null
+def arch = System.properties["os.arch"].replaceAll("_", "-")
 def sharedLibrary = null
 
 // Setting the output according to the current OS.
 if (System.properties["os.name"].equals("Linux")) {
     // Building a Linux shared library.
-    platform = "linux-x86-64"
+    platform = "linux-${arch}"
     sharedLibrary = "libkahypar.so"
 
 } else if (System.properties["os.name"].equals("Mac OS X")) {
     // Building a macOS shared library.
-    platform = "darwin"
+    platform = "darwin-${arch}"
     sharedLibrary = "libkahypar.dylib"
 
 } else {

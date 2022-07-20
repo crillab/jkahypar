@@ -19,6 +19,8 @@
 
 package fr.univartois.cril.jkahypar.hypergraph;
 
+import java.util.List;
+
 /**
  * The UnweightedHyperedge represents a {@link Hyperedge} for which no weight is
  * considered.
@@ -51,6 +53,21 @@ public final class UnweightedHyperedge implements Hyperedge {
      */
     public static UnweightedHyperedge joining(int... vertices) {
         return new UnweightedHyperedge(vertices);
+    }
+
+    /**
+     * Creates a new UnweightedHyperedge.
+     *
+     * @param vertices The vertices joined by the hyperedge.
+     *
+     * @return The created hyperedge.
+     */
+    public static UnweightedHyperedge joining(List<Integer> vertices) {
+        int[] vertexArray = new int[vertices.size()];
+        for (int i = 0; i < vertices.size(); i++) {
+            vertexArray[i] = vertices.get(i);
+        }
+        return new UnweightedHyperedge(vertexArray);
     }
 
     /*

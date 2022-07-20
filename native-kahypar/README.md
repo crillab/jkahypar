@@ -1,8 +1,8 @@
 # KaHyPar Native Library
 
 This sub-project of JKaHyPar declares as a [submodule](kahypar) the native
-implementation of [KaHyPar](https://github.com/kahypar/kahypar) to
-make easier the packaging of JKaHyPar for different platforms.
+implementation of [KaHyPar](https://github.com/kahypar/kahypar) to make
+easier the packaging of JKaHyPar for different platforms.
 
 To build the library, you need to get all KaHyPar's dependencies on your
 computer.
@@ -19,8 +19,8 @@ Finally, simply run the following command:
 ../gradlew dist
 ```
 
-This will create the `libkahypar` shared library for your OS in the `dist`
-directory at the root of the project.
+This will create the `libkahypar` shared library for your OS and architecture
+in the `dist` directory at the root of the project.
 Currently, only **Linux** and **macOS** are supported.
 If you use a different OS, you can edit [this configuration file](build.gradle)
 and, in the section *System Dependent Configuration*, add the condition

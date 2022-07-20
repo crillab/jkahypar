@@ -22,6 +22,8 @@ package fr.univartois.cril.jkahypar.hypergraph;
 import static fr.univartois.cril.jkahypar.hypergraph.HypergraphBuilder.createHypergraph;
 import static fr.univartois.cril.jkahypar.hypergraph.UnweightedHyperedge.joining;
 
+import java.util.List;
+
 /**
  * The HypergraphFactory allows to create different hypergraphs used for test
  * purposes.
@@ -46,9 +48,9 @@ public final class HypergraphFactory {
     public static Hypergraph createUnweightedHypergraph() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2))
-                .withHyperedge(joining(1, 7, 5, 6))
+                .withHyperedge(joining(List.of(1, 7, 5, 6)))
                 .withHyperedge(joining(5, 6, 4))
-                .withHyperedge(joining(2, 3, 4))
+                .withHyperedge(joining(List.of(2, 3, 4)))
                 .build();
     }
 
@@ -61,9 +63,9 @@ public final class HypergraphFactory {
     public static Hypergraph createHypergraphWithWeightsOnHyperedges() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2).withWeight(2))
-                .withHyperedge(joining(1, 7, 5, 6).withWeight(3))
+                .withHyperedge(joining(List.of(1, 7, 5, 6)).withWeight(3))
                 .withHyperedge(joining(5, 6, 4).withWeight(8))
-                .withHyperedge(joining(2, 3, 4).withWeight(7))
+                .withHyperedge(joining(List.of(2, 3, 4)).withWeight(7))
                 .build();
     }
 
@@ -76,9 +78,9 @@ public final class HypergraphFactory {
     public static Hypergraph createHypergraphWithWeightsOnVertices() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2))
-                .withHyperedge(joining(1, 7, 5, 6))
+                .withHyperedge(joining(List.of(1, 7, 5, 6)))
                 .withHyperedge(joining(5, 6, 4))
-                .withHyperedge(joining(2, 3, 4))
+                .withHyperedge(joining(List.of(2, 3, 4)))
                 .withVertexWeight(1, 5)
                 .withVertexWeight(2, 1)
                 .withVertexWeight(3, 8)
@@ -98,9 +100,9 @@ public final class HypergraphFactory {
     public static Hypergraph createHypergraphWithWeightsOnHyperedgesAndVertices() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2).withWeight(2))
-                .withHyperedge(joining(1, 7, 5, 6).withWeight(3))
+                .withHyperedge(joining(List.of(1, 7, 5, 6)).withWeight(3))
                 .withHyperedge(joining(5, 6, 4).withWeight(8))
-                .withHyperedge(joining(2, 3, 4).withWeight(7))
+                .withHyperedge(joining(List.of(2, 3, 4)).withWeight(7))
                 .withVertexWeight(1, 5)
                 .withVertexWeight(2, 1)
                 .withVertexWeight(3, 8)
