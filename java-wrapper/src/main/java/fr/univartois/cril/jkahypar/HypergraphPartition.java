@@ -91,6 +91,8 @@ public final class HypergraphPartition {
      * Gives the blocks of which this partition is made of.
      *
      * @return The blocks of this partition.
+     *
+     * @since 0.2.0
      */
     public List<List<Integer>> getBlocks() {
         if (blocks == null) {
@@ -105,6 +107,8 @@ public final class HypergraphPartition {
      * Computes the blocks of which this partition is made of.
      *
      * @return The blocks of this partition.
+     *
+     * @since 0.2.0
      */
     private List<List<Integer>> computeBlocks() {
         // Initializing the blocks as empty lists.

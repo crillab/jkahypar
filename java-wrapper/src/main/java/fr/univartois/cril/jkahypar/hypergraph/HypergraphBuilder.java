@@ -19,76 +19,35 @@
 
 package fr.univartois.cril.jkahypar.hypergraph;
 
-import java.util.Arrays;
-
 /**
- * The HypergraphBuilder provides an easy and natural interface for building hypergraphs.
+ * The HypergraphBuilder defines an easy and natural interface for building hypergraphs.
  *
  * @author Romain WALLON
  *
  * @version 0.2.0
  */
-public final class HypergraphBuilder {
+public interface HypergraphBuilder {
 
     /**
-     * The number of vertices in the hypergraph.
-     */
-    private final int numberOfVertices;
-
-    /**
-     * The weights of the vertices.
-     * If vertices are not weighted, this array remains {@code null}.
-     */
-    private int[] vertexWeights;
-
-    /**
-     * The number of hyperedges in the hypergraph.
-     */
-    private final int numberOfHyperedges;
-
-    /**
-     * The weights of the hyperedges.
-     * If hyperedges are not weighted, this array remains {@code null}.
-     */
-    private int[] hyperedgeWeights;
-
-    /**
-     * The indices at which the vertices of each hyperedge start in
-     * {@link #hyperedgeVertices}.
-     */
-    private final long[] hyperedgeIndices;
-
-    /**
-     * The vertices of the different hyperedges.
-     */
-    private int[] hyperedgeVertices;
-
-    /**
-     * The index of the current hyperedge.
-     */
-    private int hyperedgeIndex;
-
-    /**
-     * The index at which the vertices of the current hyperedge start in
-     * {@link #hyperedgeVertices}.
-     */
-    private int hyperedgeVerticesIndex;
-
-    /**
-     * Creates a new HypergraphBuilder.
+     * Creates a new HypergraphBuilder for a hypergraph for which the size is unknown.
+     * If you know the size of the hypergraph in advance, prefer using
+     * {@link #createHypergraph(int, int)} for better efficiency.
      *
-     * @param nbVertices The number of vertices in the hypergraph.
-     * @param nbHyperedges The number of hyperedges in the hypergraph.
+     * @return The created HypergraphBuilder.
+     *
+     * @see #createHypergraph(int, int)
+     *
+     * @since 0.2.0
      */
-    private HypergraphBuilder(int nbVertices, int nbHyperedges) {
-        this.numberOfVertices = nbVertices;
-        this.numberOfHyperedges = nbHyperedges;
-        this.hyperedgeIndices = new long[nbHyperedges + 1];
-        this.hyperedgeVertices = new int[nbHyperedges << 1];
+    public static HypergraphBuilder createHypergraph() {
+        return new UnknownSizeHypergraphBuilder();
     }
 
     /**
-     * Creates a new HypergraphBuilder.
+     * Creates a new HypergraphBuilder for a hypergraph for which the size is known.
+     * This method should always be used when the size is known, as it allows to manage
+     * internal data structures more efficiently than when using
+     * {@link #createHypergraph()}.
      *
      * @param nbVertices The number of vertices in the hypergraph.
      * @param nbHyperedges The number of hyperedges in the hypergraph.
@@ -96,7 +55,7 @@ public final class HypergraphBuilder {
      * @return The created HypergraphBuilder.
      */
     public static HypergraphBuilder createHypergraph(int nbVertices, int nbHyperedges) {
-        return new HypergraphBuilder(nbVertices, nbHyperedges);
+        return new KnownSizeHypergraphBuilder(nbVertices, nbHyperedges);
     }
 
     /**
@@ -104,9 +63,7 @@ public final class HypergraphBuilder {
      *
      * @return The number of vertices.
      */
-    int getNumberOfVertices() {
-        return numberOfVertices;
-    }
+    int getNumberOfVertices();
 
     /**
      * Sets the weight of a vertex in the hypergraph.
@@ -116,24 +73,14 @@ public final class HypergraphBuilder {
      *
      * @return This builder.
      */
-    public HypergraphBuilder withVertexWeight(int vertex, int weight) {
-        if (vertexWeights == null) {
-            // This is the first vertex for which a weight is specified.
-            vertexWeights = new int[numberOfVertices];
-        }
-
-        vertexWeights[vertex - 1] = weight;
-        return this;
-    }
+    HypergraphBuilder withVertexWeight(int vertex, int weight);
 
     /**
      * Gives the number of hyperedges in the hypergraph.
      *
      * @return The number of hyperedges.
      */
-    int getNumberOfHyperedges() {
-        return numberOfHyperedges;
-    }
+    int getNumberOfHyperedges();
 
     /**
      * Gives the indices at which the vertices of each hyperedge start in the array
@@ -143,9 +90,7 @@ public final class HypergraphBuilder {
      *
      * @see #getHyperedgeVertices()
      */
-    long[] getHyperedgeIndices() {
-        return hyperedgeIndices;
-    }
+    long[] getHyperedgeIndices();
 
     /**
      * Gives the vertices of the hyperedges in the hypergraph.
@@ -154,9 +99,7 @@ public final class HypergraphBuilder {
      *
      * @see #getHyperedgeIndices()
      */
-    int[] getHyperedgeVertices() {
-        return hyperedgeVertices;
-    }
+    int[] getHyperedgeVertices();
 
     /**
      * Adds an {@link UnweightedHyperedge} to the hypergraph.
@@ -165,10 +108,7 @@ public final class HypergraphBuilder {
      *
      * @return This builder.
      */
-    public HypergraphBuilder withHyperedge(UnweightedHyperedge hyperedge) {
-        appendVertices(hyperedge);
-        return this;
-    }
+    HypergraphBuilder withHyperedge(UnweightedHyperedge hyperedge);
 
     /**
      * Adds a {@link WeightedHyperedge} to the hypergraph.
@@ -177,68 +117,13 @@ public final class HypergraphBuilder {
      *
      * @return This builder.
      */
-    public HypergraphBuilder withHyperedge(WeightedHyperedge hyperedge) {
-        if (hyperedgeWeights == null) {
-            // This is the first hyperedge for which a weight is specified.
-            hyperedgeWeights = new int[numberOfHyperedges];
-        }
-
-        hyperedgeWeights[hyperedgeIndex] = hyperedge.getWeight();
-        appendVertices(hyperedge);
-        return this;
-    }
-
-    /**
-     * Appends the vertices of the given hyperedge to {@link #hyperedgeVertices}.
-     *
-     * @param hyperedge The hyperedge to append the vertices of.
-     */
-    private void appendVertices(Hyperedge hyperedge) {
-        hyperedgeIndices[hyperedgeIndex++] = hyperedgeVerticesIndex;
-        for (int vertex : hyperedge.getVertices()) {
-            appendVertex(vertex);
-        }
-    }
-
-    /**
-     * Appends a vertex to {@link #hyperedgeVertices}.
-     * The size of the array is doubled if there is not enough room to add the vertex.
-     *
-     * @param vertex The vertex to append.
-     */
-    private void appendVertex(int vertex) {
-        if (hyperedgeVertices.length == hyperedgeVerticesIndex) {
-            // There is not enough room for adding a vertex.
-            hyperedgeVertices = Arrays.copyOf(hyperedgeVertices, hyperedgeVerticesIndex << 1);
-        }
-
-        hyperedgeVertices[hyperedgeVerticesIndex++] = vertex - 1;
-    }
+    HypergraphBuilder withHyperedge(WeightedHyperedge hyperedge);
 
     /**
      * Creates the hypergraph built by this builder.
      *
      * @return The built hypergraph.
      */
-    public Hypergraph build() {
-        // Terminating the vertices.
-        hyperedgeIndices[hyperedgeIndex] = hyperedgeVerticesIndex;
-        hyperedgeVertices = Arrays.copyOf(hyperedgeVertices, hyperedgeVerticesIndex);
-
-        // Creating the hypergraph.
-        AbstractHypergraph hypergraph = new UnweightedHypergraph(this);
-
-        if (hyperedgeWeights != null) {
-            // The hyperedges of the hypergraph are weighted.
-            hypergraph = new WeightedHyperedgesHypergraph(hypergraph, hyperedgeWeights);
-        }
-
-        if (vertexWeights != null) {
-            // The vertices of the hypergraph are weighted.
-            hypergraph = new WeightedVerticesHypergraph(hypergraph, vertexWeights);
-        }
-
-        return hypergraph;
-    }
+    Hypergraph build();
 
 }

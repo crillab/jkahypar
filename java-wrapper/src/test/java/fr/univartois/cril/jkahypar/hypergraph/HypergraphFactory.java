@@ -61,7 +61,7 @@ final class HypergraphFactory {
      * @return The created hypergraph.
      */
     static Hypergraph createHypergraphWithWeightsOnHyperedges() {
-        return createHypergraph(7, 4)
+        return createHypergraph()
                 .withHyperedge(joining(1, 2).withWeight(2))
                 .withHyperedge(joining(List.of(1, 7, 5, 6)).withWeight(3))
                 .withHyperedge(joining(5, 6, 4).withWeight(8))
@@ -76,7 +76,7 @@ final class HypergraphFactory {
      * @return The created hypergraph.
      */
     static Hypergraph createHypergraphWithWeightsOnVertices() {
-        return createHypergraph(7, 4)
+        return createHypergraph()
                 .withHyperedge(joining(1, 2))
                 .withHyperedge(joining(List.of(1, 7, 5, 6)))
                 .withHyperedge(joining(5, 6, 4))
