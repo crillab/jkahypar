@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -20,11 +20,11 @@
 package fr.univartois.cril.jkahypar.hypergraph;
 
 /**
- * The HmetisFormat enumerates the possible hypergraph formats recognized by
- * hMetis.
+ * The HmetisFormat enumerates the possible hypergraph formats recognized by hMetis.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public enum HmetisFormat {
 
@@ -67,7 +67,7 @@ public enum HmetisFormat {
     }
 
     /**
-     * Checks whether the given integer encodes that the associated hypergraph is of
+     * Checks whether the given integer encodes that the associated hypergraph has
      * this format.
      *
      * @param formatIdentifier The integer encoding the format of a hypergraph.
@@ -75,7 +75,7 @@ public enum HmetisFormat {
      * @return Whether this format is encoded in the given integer.
      */
     public boolean isEncodedIn(int formatIdentifier) {
-        return (formatIdentifier == identifier) || ((identifier > 0) && (formatIdentifier == 11));
+        return (identifier == formatIdentifier) || ((identifier > 0) && (formatIdentifier == 11));
     }
 
 }

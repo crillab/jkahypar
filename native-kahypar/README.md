@@ -24,7 +24,8 @@ in the `dist` directory at the root of the project.
 Currently, only **Linux** and **macOS** are supported.
 If you use a different OS, you can edit [this configuration file](build.gradle)
 and, in the section *System Dependent Configuration*, add the condition
-allowing Gradle to identify your OS and create the appropriate shared library.
+allowing Gradle to identify your OS and to create the appropriate shared
+library.
 
 To add the newly created library to JKaHyPar, run the following command:
 
@@ -33,8 +34,8 @@ To add the newly created library to JKaHyPar, run the following command:
 ```
 
 Now, to package JKaHyPar with this new library, go back to the root directory,
-and create the JARs using the following command:
+and build JKaHyPar using the following command:
 
 ```bash
-./gradlew dist
+./gradlew jkahypar
 ```

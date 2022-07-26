@@ -9,13 +9,13 @@ This project provides a Java binding for the [KaHyPar](https://kahypar.org/)
 hypergraph partitioning framework.
 
 This library consists of a Java module named `fr.univartois.cril.jkahypar`,
-which provides an object-oritented interface for building and partitioning
+which provides an object-oriented interface for building and partitioning
 hypergraphs.
 Under the hood, [Java Native Access](https://github.com/java-native-access/jna)
 is used for invoking the native implementation provided by KaHyPar
 (currently, only **Linux** and **macOS** are supported).
 
-### Requirements
+## Requirements
 
 To use JKaHyPar, you need to have [Boost](https://www.boost.org) installed
 on your computer.
@@ -42,13 +42,13 @@ as a requirement in your `module-info.java`, and put its JAR on the
 
 You may also need to put this JAR on the *classpath* when using it within
 another application, so as to allow to dynamically load the native library it
-contains (JNA does not look into the modulepath for such libraries).
+contains (JNA does not look into the *modulepath* for such libraries).
 A possible alternative consists in specifying manually the location of the
 library (e.g., from [this directory](java-wrapper/src/main/resources/)), but
 this approach is much less convenient in practice.
 
 Once your path is properly set, you can use JKaHyPar to create hypergraphs
-and compute partitions thereof.
+and compute their partitions.
 The following section describes how to use these various features.
 
 ### Creating a Hypergraph
@@ -97,10 +97,10 @@ try (var parser = new HypergraphParser(inputStream)) {
 
 ### Manipulating a Hypergraph
 
-The `Hypergraph` interface defines a large variety of methods to deal with the
+The `Hypergraph` interface defines a wide variety of methods to deal with the
 hypergraph you have built (or read).
 You may get its String representation (in the hMetis format mentioned above),
-its vertices and their weight, or its hyperedges.
+its vertices and their weights, or its hyperedges.
 
 You may also get its internal representation.
 For efficiency reasons, note that the hypergraph does **not** keep the
@@ -135,6 +135,9 @@ try (var context = new KahyparContext()) {
     // Get the identifier of the block in which a vertex is.
     int blockOf1 = partition.blockOf(1);
 
+    // Get all the blocks of the partition.
+    var blocks = partition.getBlocks();
+
     // Get the value of the objective function for the computed partition:
     // the lower the value of the objective, the better the partition.
     int objective = partition.objectiveValue();
@@ -146,5 +149,8 @@ try (var context = new KahyparContext()) {
 ```
 
 Observe that the `KahyparContext` is instantiated in a `try-with-resource`.
-It is **always required** to do so, as this ensures that the memory used by the
-native library is properly freed.
+You should **always** do so, as this ensures that the memory used by the native
+library is properly freed.
+If you cannot use a `try-with-resource`, e.g., because you want to reuse the
+context, you must make sure that its `close()` method is called when you no
+longer need it.

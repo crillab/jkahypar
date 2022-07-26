@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -21,11 +21,12 @@ package fr.univartois.cril.jkahypar.hypergraph;
 
 /**
  * The HypergraphDecorator delegates the invocations of all methods defined in
- * {@link Hypergraph} to an instance of a class implementing this interface to
- * make easier the implementation of decorators.
+ * {@link Hypergraph} to an instance of a class implementing this interface to make easier
+ * the implementation of decorators.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 abstract class HypergraphDecorator extends AbstractHypergraph {
 
@@ -38,7 +39,7 @@ abstract class HypergraphDecorator extends AbstractHypergraph {
      * Creates a new HypergraphDecorator.
      *
      * @param hmetisFormat The hMetis format of the hypergraph.
-     * @param decorated    The hypergraph to decorate.
+     * @param decorated The hypergraph to decorate.
      */
     HypergraphDecorator(HmetisFormat hmetisFormat, AbstractHypergraph decorated) {
         super(hmetisFormat);

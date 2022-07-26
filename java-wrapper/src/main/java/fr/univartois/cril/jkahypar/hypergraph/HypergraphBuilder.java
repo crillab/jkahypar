@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -22,11 +22,11 @@ package fr.univartois.cril.jkahypar.hypergraph;
 import java.util.Arrays;
 
 /**
- * The HypergraphBuilder provides an easy and natural interface for building
- * hypergraphs.
+ * The HypergraphBuilder provides an easy and natural interface for building hypergraphs.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class HypergraphBuilder {
 
@@ -77,7 +77,7 @@ public final class HypergraphBuilder {
     /**
      * Creates a new HypergraphBuilder.
      *
-     * @param nbVertices   The number of vertices in the hypergraph.
+     * @param nbVertices The number of vertices in the hypergraph.
      * @param nbHyperedges The number of hyperedges in the hypergraph.
      */
     private HypergraphBuilder(int nbVertices, int nbHyperedges) {
@@ -90,7 +90,7 @@ public final class HypergraphBuilder {
     /**
      * Creates a new HypergraphBuilder.
      *
-     * @param nbVertices   The number of vertices in the hypergraph.
+     * @param nbVertices The number of vertices in the hypergraph.
      * @param nbHyperedges The number of hyperedges in the hypergraph.
      *
      * @return The created HypergraphBuilder.

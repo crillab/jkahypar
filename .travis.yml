@@ -12,7 +12,8 @@ install:
 addons:
     artifacts:
         paths:
-            - dist/*.jar
+            - dist/jkahypar-*.jar
+            - dist/jkahypar-*.tgz
     sonarcloud:
         organization: "cril"
         token:
@@ -22,10 +23,10 @@ jobs:
     include:
         - stage: test
           script:
-              - ./gradlew clean test 
+              - ./gradlew clean test
         - stage: package
           script:
-              - ./gradlew clean jars
+              - ./gradlew clean jkahypar
         - stage: sonar
           script:
               - ./gradlew clean test

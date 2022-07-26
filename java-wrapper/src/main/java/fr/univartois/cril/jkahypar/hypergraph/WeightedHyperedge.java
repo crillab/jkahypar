@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -20,11 +20,11 @@
 package fr.univartois.cril.jkahypar.hypergraph;
 
 /**
- * The WeightedHyperedge decorates a {@link Hyperedge} so as to consider its
- * weight.
+ * The WeightedHyperedge decorates a {@link Hyperedge} so as to consider its weight.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class WeightedHyperedge implements Hyperedge {
 
@@ -42,7 +42,7 @@ public final class WeightedHyperedge implements Hyperedge {
      * Creates a new WeightedHyperedge.
      *
      * @param decorated The hyperedge to decorate.
-     * @param weight    The weight of the hyperedge.
+     * @param weight The weight of the hyperedge.
      */
     WeightedHyperedge(Hyperedge decorated, int weight) {
         this.decorated = decorated;

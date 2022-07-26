@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -22,26 +22,28 @@ package fr.univartois.cril.jkahypar;
 import static fr.univartois.cril.jkahypar.hypergraph.HypergraphBuilder.createHypergraph;
 import static fr.univartois.cril.jkahypar.hypergraph.UnweightedHyperedge.joining;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
- * The TestHypergraphParser is a JUnit test case for testing the
- * partitioning of a hypergraph.
+ * The TestHypergraphPartitioning is a JUnit test case for testing the partitioning
+ * of a hypergraph.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
-public final class TestHypergraphPartitioning {
+final class TestHypergraphPartitioning {
 
     /**
      * Test method for the computation of a partition of a hypergraph.
      */
     @Test
     @DisplayName("A correct partition is computed")
-    public void testComputePartition() {
+    void testComputePartition() {
         try (var context = new KahyparContext()) {
             // Configuring the context.
             context.configureFrom("src/test/resources/config/cut_kKaHyPar_sea20.ini");
@@ -58,7 +60,7 @@ public final class TestHypergraphPartitioning {
             var partitioner = context.createPartitionerFor(hypergraph);
             var partition = partitioner.computePartition();
 
-            // Checking whether the first correct solution have been found.
+            // Checking whether the first correct solution has been found.
             boolean firstSolution = (partition.blockOf(1) == 0)
                     && (partition.blockOf(2) == 0)
                     && (partition.blockOf(3) == 1)
@@ -67,7 +69,7 @@ public final class TestHypergraphPartitioning {
                     && (partition.blockOf(6) == 1)
                     && (partition.blockOf(7) == 1);
 
-            // Checking whether the second correct solution have been found.
+            // Checking whether the second correct solution has been found.
             boolean secondSolution = (partition.blockOf(1) == 1)
                     && (partition.blockOf(2) == 1)
                     && (partition.blockOf(3) == 0)
@@ -79,6 +81,15 @@ public final class TestHypergraphPartitioning {
             // Checking that a correct solution has been found.
             assertTrue(firstSolution || secondSolution, "Incorrect partitioning!");
             assertEquals(2, partition.objectiveValue());
+
+            // Checking that the blocks correspond to the identifiers found above.
+            var blocks = partition.getBlocks();
+            assertEquals(2, blocks.size());
+            for (int v = 1; v < 8; v++) {
+                int blockId = partition.blockOf(v);
+                assertTrue(blocks.get(blockId).contains(v), "Vertex not in expected block!");
+                assertFalse(blocks.get(1 - blockId).contains(v), "Vertex in wrong block!");
+            }
         }
     }
 

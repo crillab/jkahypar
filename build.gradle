@@ -18,9 +18,9 @@ allprojects {
  * Tasks *
  *********/
 
-// Creating the shared library of KaHyPar.
-task makeSharedLibrary {
-    dependsOn "native-kahypar:dist"
+// Creating the shared library of KaHyPar to be used by JKaHyPar.
+task nativeKahypar {
+    dependsOn "native-kahypar:buildForJkahypar"
 }
 
 // Executing the tests of the Java implementation.
@@ -30,9 +30,8 @@ task test {
 }
 
 // Creating the binary distribution of JKaHyPar.
-task jars {
-    dependsOn "java-wrapper:jar"
-    dependsOn "java-wrapper:dist"
+task jkahypar {
+    dependsOn "java-wrapper:jkahypar"
 }
 
 // Cleaning the build files.

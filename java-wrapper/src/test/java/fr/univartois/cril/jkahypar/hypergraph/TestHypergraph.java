@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -31,7 +31,8 @@ import org.junit.jupiter.api.Test;
  * instances of {@link Hypergraph}.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class TestHypergraph {
 
@@ -42,14 +43,13 @@ public final class TestHypergraph {
      */
     @Test
     @DisplayName("Unweighted hypergraphs are properly built")
-    public void testUnweightedHypergraph() {
+    void testUnweightedHypergraph() {
         var hypergraph = HypergraphFactory.createUnweightedHypergraph();
         testUnweightedHypergraph(hypergraph);
     }
 
     /**
-     * Checks that the given hypergraph is the unweighted hypergraph that is
-     * expected.
+     * Checks that the given hypergraph is the unweighted hypergraph that is expected.
      *
      * @param hypergraph The hypergraph to check
      */
@@ -105,7 +105,7 @@ public final class TestHypergraph {
      */
     @Test
     @DisplayName("Hypergraphs with weights on hyperedges are properly built")
-    public void testHypergraphWithWeightsOnHyperedges() {
+    void testHypergraphWithWeightsOnHyperedges() {
         var hypergraph = HypergraphFactory.createHypergraphWithWeightsOnHyperedges();
         testHypergraphWithWeightsOnHyperedges(hypergraph);
     }
@@ -172,7 +172,7 @@ public final class TestHypergraph {
      */
     @Test
     @DisplayName("Hypergraphs with weights on vertices are properly built")
-    public void testHypergraphWithWeightsOnVertices() {
+    void testHypergraphWithWeightsOnVertices() {
         var hypergraph = HypergraphFactory.createHypergraphWithWeightsOnVertices();
         testHypergraphWithWeightsOnVertices(hypergraph);
     }
@@ -243,7 +243,7 @@ public final class TestHypergraph {
      */
     @Test
     @DisplayName("Hypergraphs with weights on hyperedges and vertices are properly built")
-    public void testHypergraphWithWeightsOnHyperedgesAndVertices() {
+    void testHypergraphWithWeightsOnHyperedgesAndVertices() {
         var hypergraph = HypergraphFactory.createHypergraphWithWeightsOnHyperedgesAndVertices();
         testHypergraphWithWeightsOnHyperedgesAndVertices(hypergraph);
     }

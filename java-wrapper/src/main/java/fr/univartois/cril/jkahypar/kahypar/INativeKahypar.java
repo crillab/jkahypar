@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -30,7 +30,8 @@ import com.sun.jna.Pointer;
  * methods must have exactly the same name as in the native implementation.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 interface INativeKahypar extends Library {
 
@@ -44,72 +45,66 @@ interface INativeKahypar extends Library {
     /**
      * Reads the configuration to apply for a KaHyPar context.
      *
-     * @param context  The context to configure.
+     * @param context The context to configure.
      * @param fileName The name of the INI file to read the configuration from.
      */
     void kahypar_configure_context_from_file(Pointer context, String fileName);
 
     /**
-     * Sets the weights that must have the blocks computed by the partitioning
-     * algorithm.
+     * Sets the weights that must have the blocks computed by the partitioning algorithm.
      *
-     * @param nbBlocks     The number of blocks in the partition.
+     * @param nbBlocks The number of blocks in the partition.
      * @param blockWeights The weights that the blocks must have.
-     * @param context      The context in which the partition is computed.
+     * @param context The context in which the partition is computed.
      */
-    void kahypar_set_custom_target_block_weights(int nbBlocks, int[] blockWeights,
-            Pointer context);
+    void kahypar_set_custom_target_block_weights(int nbBlocks, int[] blockWeights, Pointer context);
 
     /**
      * Computes a partition of a hypergraph using KaHyPar native implementation.
      *
-     * @param nbVertices       The number of vertices in the hypergraph.
-     * @param nbHyperedges     The number of hyperedges in the hypergraph.
-     * @param imbalance        The imbalance parameter for the partitioning
-     *                         algorithm.
-     * @param nbBlocks         The number of blocks in the partition.
-     * @param vertexWeights    The weights of the vertices in the hypergraph.
+     * @param nbVertices The number of vertices in the hypergraph.
+     * @param nbHyperedges The number of hyperedges in the hypergraph.
+     * @param imbalance The imbalance parameter for the partitioning algorithm.
+     * @param nbBlocks The number of blocks in the partition.
+     * @param vertexWeights The weights of the vertices in the hypergraph.
      * @param hyperedgeWeights The weights of the hyperedges in the hypergraph.
-     * @param hyperedgeIndices The indices at which the vertices of each hyperedge
-     *                         start in {@code hyperedges}.
-     * @param hyperedges       The vertices of the hyperedges in the hypergraph.
-     * @param objective        The array for storing the value of the objective
-     *                         function.
-     * @param context          The context in which the partition is computed.
-     * @param partition        The array in which to store the improved partition.
+     * @param hyperedgeIndices The indices at which the vertices of each hyperedge start
+     *        in {@code hyperedges}.
+     * @param hyperedges The vertices of the hyperedges in the hypergraph.
+     * @param objective The array for storing the value of the objective function.
+     * @param context The context in which the partition is computed.
+     * @param partition The array in which to store the computed partition.
      */
     void kahypar_partition(int nbVertices, int nbHyperedges, double imbalance, int nbBlocks,
-            int[] vertexWeights, int[] hyperedgeWeights, long[] hyperedgeIndices,
-            int[] hyperedges, int[] objective, Pointer context, int[] partition);
+            int[] vertexWeights, int[] hyperedgeWeights, long[] hyperedgeIndices, int[] hyperedges,
+            int[] objective, Pointer context, int[] partition);
 
     /**
      * Improves a partition computed by KaHyPar.
      *
-     * @param nbVertices        The number of vertices in the hypergraph.
-     * @param nbHyperedges      The number of hyperedges in the hypergraph.
-     * @param imbalance         The imbalance parameter for the partitioning
-     *                          algorithm.
-     * @param nbBlocks          The number of blocks in the partition.
-     * @param vertexWeights     The weights of the vertices in the hypergraph.
-     * @param hyperedgeWeights  The weights of the hyperedges in the hypergraph.
-     * @param hyperedgeIndices  The indices at which the vertices of each hyperedge
-     *                          start in {@code hyperedges}.
-     * @param hyperedges        The vertices of the hyperedges in the hypergraph.
-     * @param initialPartition  The partition to improve.
-     * @param nbIterations      The number of iterations to perform for improving
-     *                          the partition.
-     * @param objective         The array for storing the value of the objective
-     *                          function.
-     * @param context           The context in which the partition is computed.
+     * @param nbVertices The number of vertices in the hypergraph.
+     * @param nbHyperedges The number of hyperedges in the hypergraph.
+     * @param imbalance The imbalance parameter for the partitioning algorithm.
+     * @param nbBlocks The number of blocks in the partition.
+     * @param vertexWeights The weights of the vertices in the hypergraph.
+     * @param hyperedgeWeights The weights of the hyperedges in the hypergraph.
+     * @param hyperedgeIndices The indices at which the vertices of each hyperedge start
+     *        in {@code hyperedges}.
+     * @param hyperedges The vertices of the hyperedges in the hypergraph.
+     * @param initialPartition The partition to improve.
+     * @param nbIterations The number of iterations to perform for improving the
+     *        partition.
+     * @param objective The array for storing the value of the objective function.
+     * @param context The context in which the partition is computed.
      * @param improvedPartition The array in which to store the improved partition.
      */
-    void kahypar_improve_partition(int nbVertices, int nbHyperedges, double imbalance,
-            int nbBlocks, int[] vertexWeights, int[] hyperedgeWeights, long[] hyperedgeIndices,
-            int[] hyperedges, int[] initialPartition, long nbIterations, int[] objective,
-            Pointer context, int[] improvedPartition);
+    void kahypar_improve_partition(int nbVertices, int nbHyperedges, double imbalance, int nbBlocks,
+            int[] vertexWeights, int[] hyperedgeWeights, long[] hyperedgeIndices, int[] hyperedges,
+            int[] initialPartition, long nbIterations, int[] objective, Pointer context,
+            int[] improvedPartition);
 
     /**
-     * Frees the memory used for a context from KaHyPar.
+     * Frees the memory used by a context from KaHyPar.
      *
      * @param context The context to free.
      */

@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -20,16 +20,17 @@
 package fr.univartois.cril.jkahypar.hypergraph;
 
 /**
- * The Hyperedge interface defines the contract of the data structures
- * representing the hyperedges of a hypergraph.
+ * The Hyperedge interface defines the contract of the data structures representing the
+ * hyperedges of a hypergraph.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public interface Hyperedge {
 
     /**
-     * Gives the size of this hyperedge, measured in number of vertices it joins.
+     * Gives the size of this hyperedge, measured as the number of vertices it joins.
      *
      * @return The size of this hyperedge.
      */

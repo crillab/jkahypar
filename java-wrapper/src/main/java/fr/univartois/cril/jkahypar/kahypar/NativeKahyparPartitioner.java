@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -29,7 +29,8 @@ import fr.univartois.cril.jkahypar.hypergraph.Hypergraph;
  * partitioning algorithm implemented in the KaHyPar native library.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class NativeKahyparPartitioner {
 
@@ -56,8 +57,7 @@ public final class NativeKahyparPartitioner {
     /**
      * Creates a new NativeKahyparPartitioner.
      *
-     * @param context    The context in which the partitioning algorithm is
-     *                   executed.
+     * @param context The context in which the partitioning algorithm is executed.
      * @param hypergraph The hypergraph to compute a partition of.
      */
     NativeKahyparPartitioner(NativeKahyparContext context, Hypergraph hypergraph) {
@@ -82,18 +82,18 @@ public final class NativeKahyparPartitioner {
 
     /**
      * Improves the last partition that has been computed by this partitioner.
-     * The method {@link #computePartition()} must have been invoked before invoking
-     * this method.
+     * The method {@link #computePartition()} must have been invoked before invoking this
+     * method.
      *
      * @param nbIterations The number of iterations to perform for improving the
-     *                     partition.
+     *        partition.
      *
      * @see #computePartition()
      */
     public void improvePartition(int nbIterations) {
         var newPartition = new int[hypergraph.getNumberOfVertices()];
-        lastObjectiveValue = kahyparImprovePartition(context, hypergraph, lastPartition,
-                nbIterations, newPartition);
+        lastObjectiveValue = kahyparImprovePartition(
+                context, hypergraph, lastPartition, nbIterations, newPartition);
         lastPartition = newPartition;
     }
 

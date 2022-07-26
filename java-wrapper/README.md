@@ -6,27 +6,22 @@ This sub-project of JKaHyPar implements the Java binding of
 
 ## Building JKaHyPar
 
-JKaHyPar may be built from sources in two different manners.
-First, if you want a modular JAR, including only JKaHyPar and the native
-shared library, run the following command from within this directory:
+To build JKaHyPar from its source code, execute the following command
+from the directory of this sub-project:
 
 ```bash
-../gradlew jar
+../gradlew jkahypar
 ```
 
-If you prefer to get a fat JAR, which also includes JKaHyPar dependencies
-(namely, JNA), run the following command:
-
-```bash
-../gradlew dist
-```
-
-In both cases, the JAR will be put in the `dist` directory at the root of the
-project.
+This will create a directory `dist/jars` at the root of the project,
+that will contain the jars of JKaHyPar and its dependencies.
+It will also produce a gzipped-tarball `dist/jkahypar-*.tgz`, containing
+all these jars and the [README file of the root project](../README.md).
 
 ## Executing the Tests
 
-If you want to execute JKaHyPar's tests, run the following command:
+If you want to execute JKaHyPar's tests, run the following command from the
+directory of this sub-project:
 
 ```bash
 ../gradlew test

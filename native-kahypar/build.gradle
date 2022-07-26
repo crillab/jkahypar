@@ -26,7 +26,7 @@ if (System.properties["os.name"].equals("Linux")) {
     sharedLibrary = "libkahypar.dylib"
 
 } else {
-    // Building on the current OS is not supported.
+    // Building on the current OS is not supported (yet).
     throw new GradleException("Unsupported OS: " + System.properties["os.name"])
 }
 

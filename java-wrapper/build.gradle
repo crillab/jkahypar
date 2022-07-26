@@ -12,6 +12,9 @@ apply plugin: "jacoco"
 
 ext.moduleName = "fr.univartois.cril.jkahypar"
 
+sourceCompatibility = "11"
+targetCompatibility = "11"
+
 /****************
  * Dependencies *
  ****************/
@@ -92,23 +95,36 @@ jacocoTestReport {
  * Packaging *
  *************/
 
-// Putting the modular JAR in the distribution directory.
+// Putting the JAR in the distribution directory.
 tasks.withType(Jar) {
-    archiveBaseName = "jkahypar-module"
-    destinationDirectory = file("${rootDir}/dist")
-}
-
-// Creating a fat JAR with all dependencies.
-task dist(type: Jar) {
     archiveBaseName = "jkahypar"
-    with jar
-
-    from {
-        configurations.compileClasspath.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
+    destinationDirectory = file("${rootDir}/dist/jars")
 }
+
+// Collects the external dependencies of JKaHyPar into the output directory.
+task collectExternalDependencies(type: Copy) {
+    from configurations.runtimeClasspath.collect { it }
+    into "${rootDir}/dist/jars"
+}
+
+// Creating a gzipped-tarball with JKaHyPar and its dependencies.
+task jkahypar(type: Tar) {
+    dependsOn jar
+    dependsOn collectExternalDependencies
+
+    from file("${rootDir}/dist/jars"), file("../README.md")
+    destinationDirectory = file("${rootDir}/dist")
+    archiveBaseName = "jkahypar"
+    archiveExtension = "tgz"
+
+    compression = Compression.GZIP
+}
+
+// Removes the binary files of JKaHyPar when cleaning.
+task removeBinaries(type: Delete) {
+    delete "dist"
+}
+clean.dependsOn removeBinaries
 
 /*************
  * Functions *

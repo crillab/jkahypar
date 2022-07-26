@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -28,17 +28,20 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import fr.univartois.cril.jkahypar.hypergraph.HmetisFormat;
 import fr.univartois.cril.jkahypar.hypergraph.Hypergraph;
 import fr.univartois.cril.jkahypar.hypergraph.HypergraphBuilder;
 
 /**
- * The HypergraphParser allows to parse a file in the hMetis format so as to
- * read a {@link Hypergraph} instance.
+ * The HypergraphParser allows to parse a file in the hMetis format so as to read a
+ * {@link Hypergraph} instance.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class HypergraphParser implements Closeable {
 
@@ -71,6 +74,17 @@ public final class HypergraphParser implements Closeable {
      * The array to use to read the integers in a line of the input stream.
      */
     private int[] integerLine;
+
+    /**
+     * Creates a new HypergraphParser.
+     *
+     * @param inputFile The path of the input file to read the hypergraph from.
+     *
+     * @throws IOException If an I/O error occurs while opening the file.
+     */
+    public HypergraphParser(String inputFile) throws IOException {
+        this(Files.newInputStream(Path.of(inputFile)));
+    }
 
     /**
      * Creates a new HypergraphParser.

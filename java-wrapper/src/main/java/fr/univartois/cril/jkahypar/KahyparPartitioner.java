@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -22,12 +22,12 @@ package fr.univartois.cril.jkahypar;
 import fr.univartois.cril.jkahypar.kahypar.NativeKahyparPartitioner;
 
 /**
- * The KahyparPartitioner allows to compute a partition of a given hypergraph
- * using a predefined configuration inherited from the context in which it is
- * executed.
+ * The KahyparPartitioner allows to compute a partition of a given hypergraph using a
+ * predefined configuration inherited from the context in which it is executed.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class KahyparPartitioner {
 
@@ -37,13 +37,19 @@ public final class KahyparPartitioner {
     private final NativeKahyparPartitioner nativePartitioner;
 
     /**
+     * The number of blocks in the partitions to compute.
+     */
+    private final int numberOfBlocks;
+
+    /**
      * Creates a new KahyparPartitioner.
      *
-     * @param nativePartitioner The native partitioner which actually computes the
-     *                          partitions.
+     * @param nativePartitioner The native partitioner which actually computes the partitions.
+     * @param numberOfBlocks The number of blocks in the partitions to compute.
      */
-    KahyparPartitioner(NativeKahyparPartitioner nativePartitioner) {
+    KahyparPartitioner(NativeKahyparPartitioner nativePartitioner, int numberOfBlocks) {
         this.nativePartitioner = nativePartitioner;
+        this.numberOfBlocks = numberOfBlocks;
     }
 
     /**
@@ -57,8 +63,8 @@ public final class KahyparPartitioner {
     }
 
     /**
-     * Improves the last partition computed by this partitioner. Only one iteration
-     * is performed.
+     * Improves the last partition computed by this partitioner.
+     * Only one iteration is performed.
      *
      * @return The improved partition.
      *
@@ -71,8 +77,7 @@ public final class KahyparPartitioner {
     /**
      * Improves the last partition computed by this partitioner.
      *
-     * @param nbIterations The number of iterations to perform to improve the
-     *                     partition.
+     * @param nbIterations The number of iterations to perform to improve the partition.
      *
      * @return The improved partition.
      */
@@ -88,6 +93,7 @@ public final class KahyparPartitioner {
      */
     private HypergraphPartition lastPartition() {
         return new HypergraphPartition(
+                numberOfBlocks,
                 nativePartitioner.getLastPartition(),
                 nativePartitioner.getLastObjectiveValue());
     }

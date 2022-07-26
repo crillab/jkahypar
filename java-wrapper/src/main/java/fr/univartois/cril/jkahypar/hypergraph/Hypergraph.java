@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -20,11 +20,12 @@
 package fr.univartois.cril.jkahypar.hypergraph;
 
 /**
- * The Hypergraph interface defines the contract of the data structures
- * representing hypergraphs.
+ * The Hypergraph interface defines the contract of the data structures representing
+ * hypergraphs.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public interface Hypergraph {
 
@@ -38,8 +39,7 @@ public interface Hypergraph {
     /**
      * Gives the weights of the vertices in this hypergraph.
      *
-     * @return The weights of the vertices, or {@code null} if vertices are not
-     *         weighted.
+     * @return The weights of the vertices, or {@code null} if vertices are not weighted.
      */
     int[] getVertexWeights();
 

@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -19,8 +19,8 @@
 
 package fr.univartois.cril.jkahypar.hypergraph;
 
-import static fr.univartois.cril.jkahypar.hypergraph.UnweightedHyperedge.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static fr.univartois.cril.jkahypar.hypergraph.UnweightedHyperedge.joining;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,9 +30,10 @@ import org.junit.jupiter.api.Test;
  * {@link Hyperedge}.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
-public final class TestHyperedge {
+final class TestHyperedge {
 
     /**
      * Test method for unweighted hyperedges.
@@ -41,7 +42,7 @@ public final class TestHyperedge {
      */
     @Test
     @DisplayName("Unweighted hyperedges have the expected behavior")
-    public void testUnweightedHyperedge() {
+    void testUnweightedHyperedge() {
         var hyperedge = joining(2, 7, 9, 12, 15);
 
         assertEquals(5, hyperedge.size());
@@ -64,7 +65,7 @@ public final class TestHyperedge {
      */
     @Test
     @DisplayName("Weighted hyperedges have the expected behavior")
-    public void testWeightedHyperedge() {
+    void testWeightedHyperedge() {
         var hyperedge = joining(1, 3, 5, 8).withWeight(6);
 
         assertEquals(4, hyperedge.size());

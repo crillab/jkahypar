@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -19,19 +19,34 @@
 
 package fr.univartois.cril.jkahypar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The HypergraphPartition represents a partition of a hypergraph.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class HypergraphPartition {
+
+    /**
+     * The number of blocks in the partition.
+     */
+    private final int numberOfBlocks;
 
     /**
      * The array associating to each vertex the identifier of the block to which it
      * belongs.
      */
     private final int[] blockIdentifiers;
+
+    /**
+     * The blocks of which this partition is made of.
+     * These blocks are lazily computed.
+     */
+    private List<List<Integer>> blocks;
 
     /**
      * The value of the objective function on this partition.
@@ -41,11 +56,13 @@ public final class HypergraphPartition {
     /**
      * Creates a new HypergraphPartition.
      *
-     * @param blockIdentifiers The array associating to each vertex the identifier
-     *                         of the block to which it belongs.
-     * @param objectiveValue   The value of the objective function on the partition.
+     * @param numberOfBlocks The number of blocks in the partition.
+     * @param blockIdentifiers The array associating to each vertex the identifier of the
+     *        block to which it belongs.
+     * @param objectiveValue The value of the objective function on the partition.
      */
-    HypergraphPartition(int[] blockIdentifiers, int objectiveValue) {
+    HypergraphPartition(int numberOfBlocks, int[] blockIdentifiers, int objectiveValue) {
+        this.numberOfBlocks = numberOfBlocks;
         this.blockIdentifiers = blockIdentifiers;
         this.objectiveValue = objectiveValue;
     }
@@ -68,6 +85,40 @@ public final class HypergraphPartition {
      */
     public int objectiveValue() {
         return objectiveValue;
+    }
+
+    /**
+     * Gives the blocks of which this partition is made of.
+     *
+     * @return The blocks of this partition.
+     */
+    public List<List<Integer>> getBlocks() {
+        if (blocks == null) {
+            // The blocks have not been computed yet.
+            blocks = computeBlocks();
+        }
+
+        return blocks;
+    }
+
+    /**
+     * Computes the blocks of which this partition is made of.
+     *
+     * @return The blocks of this partition.
+     */
+    private List<List<Integer>> computeBlocks() {
+        // Initializing the blocks as empty lists.
+        var result = new ArrayList<List<Integer>>(numberOfBlocks);
+        for (int i = 0; i < numberOfBlocks; i++) {
+            result.add(new ArrayList<>());
+        }
+
+        // Filling the blocks of the partition with their corresponding vertices.
+        for (int v = 0; v < blockIdentifiers.length; v++) {
+            result.get(blockIdentifiers[v]).add(v + 1);
+        }
+
+        return result;
     }
 
 }

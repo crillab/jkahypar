@@ -5,8 +5,8 @@ There are multiple ways to contribute, as described below.
 
 ## Developing JKaHyPar
 
-The JKaHyPar library is developed with the latest versions of
-[Gradle](https://gradle.org/) and [Eclipse](https://www.eclipse.org/).
+The JKaHyPar library is developed with [Gradle](https://gradle.org/) and
+[Eclipse](https://www.eclipse.org/).
 Even though you are not required to install them, as you can rely on the
 `gradlew` script to build the library and use a different IDE, we highly
 recommend to use these tools, as this project is optimized for being developed
@@ -23,11 +23,10 @@ Once this is done, open a terminal in the `jkahypar` directory and tell Gradle
 to generate Eclipse configuration files by executing this command:
 
 ```bash
-gradle eclipse
+./gradlew eclipse
 ```
 
-Once this is done, you just need to open Eclipse and import the JKaHyPar
-project.
+Then, you just need to open Eclipse and import the JKaHyPar project.
 Do not forget to check the *Search for nested project* box.
 
 ## New Features
@@ -63,7 +62,7 @@ We will only accept pull requests satisfying the following conditions:
 + The feature you implemented is properly documented to help people understand
   how to use it.
 + You have written some tests for your feature, either by completing the
-  existing ones, or by providing your own.
+  existing ones, or by providing your owns.
 + No breaking changes are introduced, unless your feature requires them.
 + Your implementation is easily readable, and does not trigger any avoidable
   linter warning.

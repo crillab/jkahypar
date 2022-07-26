@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -28,13 +28,13 @@ import fr.univartois.cril.jkahypar.hypergraph.Hypergraph;
 import fr.univartois.cril.jkahypar.hypergraph.TestHypergraph;
 
 /**
- * The TestHypergraphParser is a JUnit test case for testing the
- * {@link HypergraphParser}.
+ * The TestHypergraphParser is a JUnit test case for testing the {@link HypergraphParser}.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
-public final class TestHypergraphParser {
+final class TestHypergraphParser {
 
     /**
      * Tests that the parser successfully parses an unweighted hypergraph.
@@ -43,8 +43,7 @@ public final class TestHypergraphParser {
      */
     @Test
     @DisplayName("Unweighted hypergraphs are properly read")
-    public void testReadUnweightedHypergraph() throws IOException {
-        System.out.println(System.getProperty("user.dir"));
+    void testReadUnweightedHypergraph() throws IOException {
         var hypergraph = readHypergraph("unweighted.hgr");
         TestHypergraph.testUnweightedHypergraph(hypergraph);
     }
@@ -57,7 +56,7 @@ public final class TestHypergraphParser {
      */
     @Test
     @DisplayName("Hypergraphs with weights on hyperedges are properly read")
-    public void testReadHypergraphWithWeightsOnHyperedges() throws IOException {
+    void testReadHypergraphWithWeightsOnHyperedges() throws IOException {
         var hypergraph = readHypergraph("weighted-hyperedges.hgr");
         TestHypergraph.testHypergraphWithWeightsOnHyperedges(hypergraph);
     }
@@ -70,20 +69,20 @@ public final class TestHypergraphParser {
      */
     @Test
     @DisplayName("Hypergraphs with weights on vertices are properly read")
-    public void testReadHypergraphWithWeightsOnVertices() throws IOException {
+    void testReadHypergraphWithWeightsOnVertices() throws IOException {
         var hypergraph = readHypergraph("weighted-vertices.hgr");
         TestHypergraph.testHypergraphWithWeightsOnVertices(hypergraph);
     }
 
     /**
      * Tests that the parser successfully parses a hypergraph with weights on
-     * hyperedges and vertices.
+     * both hyperedges and vertices.
      *
      * @throws IOException If an I/O error occurs while reading.
      */
     @Test
     @DisplayName("Hypergraphs with weights on hyperedges and vertices are properly read")
-    public void testReadHypergraphWithWeightsOnHyperedgesAndVertices() throws IOException {
+    void testReadHypergraphWithWeightsOnHyperedgesAndVertices() throws IOException {
         var hypergraph = readHypergraph("weighted-hyperedges-vertices.hgr");
         TestHypergraph.testHypergraphWithWeightsOnHyperedgesAndVertices(hypergraph);
     }

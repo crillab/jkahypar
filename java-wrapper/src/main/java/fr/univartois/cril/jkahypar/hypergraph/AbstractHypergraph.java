@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -20,11 +20,11 @@
 package fr.univartois.cril.jkahypar.hypergraph;
 
 /**
- * The AbstractHypergraph is the parent class of all implementations of
- * {@link Hypergraph}. It implements their String representation in the hMetis
- * format, as a template method.
+ * The AbstractHypergraph is the parent class of all implementations of {@link Hypergraph}.
+ * It implements their String representation in the hMetis format, as a template method.
  *
  * @author Romain WALLON
+ *
  * @version 0.2.0
  */
 abstract class AbstractHypergraph implements Hypergraph {
@@ -53,19 +53,21 @@ abstract class AbstractHypergraph implements Hypergraph {
         var builder = new StringBuilder();
 
         // Adding the header.
-        builder.append(hmetisHeader()).append(System.lineSeparator());
+        builder.append(hmetisHeader());
+        builder.append(System.lineSeparator());
 
         // Adding the hyperedges.
         for (int h = 0; h < getNumberOfHyperedges(); h++) {
-            builder.append(getHyperedge(h)).append(System.lineSeparator());
+            builder.append(getHyperedge(h));
+            builder.append(System.lineSeparator());
         }
 
         return builder.toString();
     }
 
     /**
-     * Gives the String containing the characteristics of this hypergraph and used
-     * as header in the hMetis representation of this hypergraph
+     * Gives the String containing the characteristics of this hypergraph and used as
+     * header in the hMetis representation of this hypergraph
      *
      * @return The header String in the hMetis representation of this hypergraph.
      */

@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -29,7 +29,8 @@ import fr.univartois.cril.jkahypar.kahypar.NativeKahyparContext;
  * In particular, this context allows to configure the partitioning algorithm.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class KahyparContext implements AutoCloseable {
 
@@ -46,7 +47,7 @@ public final class KahyparContext implements AutoCloseable {
     }
 
     /**
-     * Loads this context configuration from an INI file.
+     * Loads the configuration of this context from an INI file.
      *
      * @param iniFile The file to load the configuration from.
      */
@@ -81,7 +82,7 @@ public final class KahyparContext implements AutoCloseable {
      */
     public KahyparPartitioner createPartitionerFor(Hypergraph hypergraph) {
         var nativePartitioner = nativeContext.createPartitionerFor(hypergraph);
-        return new KahyparPartitioner(nativePartitioner);
+        return new KahyparPartitioner(nativePartitioner, nativeContext.getNumberOfBlocks());
     }
 
     /*

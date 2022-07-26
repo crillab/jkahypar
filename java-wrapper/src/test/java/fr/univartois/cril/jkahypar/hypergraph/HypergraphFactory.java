@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -25,13 +25,13 @@ import static fr.univartois.cril.jkahypar.hypergraph.UnweightedHyperedge.joining
 import java.util.List;
 
 /**
- * The HypergraphFactory allows to create different hypergraphs used for test
- * purposes.
+ * The HypergraphFactory allows to create different hypergraphs used for test purposes.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
-public final class HypergraphFactory {
+final class HypergraphFactory {
 
     /**
      * Disables instantiation.
@@ -41,11 +41,11 @@ public final class HypergraphFactory {
     }
 
     /**
-     * Creates the unweighted hypergraph used as example in hMetis manual.
+     * Creates the unweighted hypergraph used as example in hMetis' manual.
      *
      * @return The created hypergraph.
      */
-    public static Hypergraph createUnweightedHypergraph() {
+    static Hypergraph createUnweightedHypergraph() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2))
                 .withHyperedge(joining(List.of(1, 7, 5, 6)))
@@ -56,11 +56,11 @@ public final class HypergraphFactory {
 
     /**
      * Creates the hypergraph having weights only on its hyperedges used as example
-     * in hMetis manual.
+     * in hMetis' manual.
      *
      * @return The created hypergraph.
      */
-    public static Hypergraph createHypergraphWithWeightsOnHyperedges() {
+    static Hypergraph createHypergraphWithWeightsOnHyperedges() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2).withWeight(2))
                 .withHyperedge(joining(List.of(1, 7, 5, 6)).withWeight(3))
@@ -71,11 +71,11 @@ public final class HypergraphFactory {
 
     /**
      * Creates the hypergraph having weights only on its vertices used as example in
-     * hMetis manual.
+     * hMetis' manual.
      *
      * @return The created hypergraph.
      */
-    public static Hypergraph createHypergraphWithWeightsOnVertices() {
+    static Hypergraph createHypergraphWithWeightsOnVertices() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2))
                 .withHyperedge(joining(List.of(1, 7, 5, 6)))
@@ -93,11 +93,11 @@ public final class HypergraphFactory {
 
     /**
      * Creates the hypergraph having weights on both its hyperedges and vertices
-     * used as example in hMetis manual.
+     * used as example in hMetis' manual.
      *
      * @return The created hypergraph.
      */
-    public static Hypergraph createHypergraphWithWeightsOnHyperedgesAndVertices() {
+    static Hypergraph createHypergraphWithWeightsOnHyperedgesAndVertices() {
         return createHypergraph(7, 4)
                 .withHyperedge(joining(1, 2).withWeight(2))
                 .withHyperedge(joining(List.of(1, 7, 5, 6)).withWeight(3))

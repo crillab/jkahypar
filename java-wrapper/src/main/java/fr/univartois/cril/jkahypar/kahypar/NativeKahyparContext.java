@@ -1,6 +1,6 @@
 /**
  * JKaHyPar - Java binding for the KaHyPar hypergraph partitioning framework.
- * Copyright (c) 2020 - Univ Artois & CNRS.
+ * Copyright (c) 2020-2022 - Univ Artois & CNRS.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -32,7 +32,8 @@ import fr.univartois.cril.jkahypar.hypergraph.Hypergraph;
  * KaHyPar {@code Context} object.
  *
  * @author Romain WALLON
- * @version 0.1.0
+ *
+ * @version 0.2.0
  */
 public final class NativeKahyparContext {
 
@@ -70,8 +71,7 @@ public final class NativeKahyparContext {
     }
 
     /**
-     * Gives the reference to the native context wrapped in this
-     * NativeKahyparContext.
+     * Gives the reference to the native context wrapped in this NativeKahyparContext.
      *
      * @return The reference to the native context.
      */
@@ -93,7 +93,7 @@ public final class NativeKahyparContext {
      *
      * @return The imbalance parameter to use.
      */
-    double getImbalance() {
+    public double getImbalance() {
         return imbalance;
     }
 
@@ -111,13 +111,12 @@ public final class NativeKahyparContext {
      *
      * @return The number of blocks.
      */
-    int getNumberOfBlocks() {
+    public int getNumberOfBlocks() {
         return numberOfBlocks;
     }
 
     /**
-     * Sets the weights that must have the blocks computed by the partitioning
-     * algorithm.
+     * Sets the weights that must have the blocks computed by the partitioning algorithm.
      *
      * @param blockWeights The weights of the blocks.
      */
