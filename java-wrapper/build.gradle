@@ -9,6 +9,7 @@
 
 apply plugin: "java"
 apply plugin: "jacoco"
+apply plugin: "maven-publish"
 
 ext.moduleName = "fr.univartois.cril.jkahypar"
 
@@ -125,6 +126,75 @@ task removeBinaries(type: Delete) {
     delete "dist"
 }
 clean.dependsOn removeBinaries
+
+/****************
+ * Distribution *
+ ****************/
+
+// Adding the Javadoc and source JARs to the generated artifacts.
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+// Configuring the POM file to publish.
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = "jkahypar"
+            from components.java
+
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
+
+            pom {
+                name = "JKaHyPar"
+                description = "Java binding for the KaHyPar hypergraph partitioning framework."
+                url = "https://github.com/crillab/jkahypar"
+
+                licenses {
+                    license {
+                        name = "GNU General Public License, Version 3"
+                        url = "https://www.gnu.org/licenses/gpl-3.0.html"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "romainwallon"
+                        name = "Romain Wallon"
+                        email = "wallon@cril.fr"
+                    }
+                }
+
+                scm {
+                    connection = "scm:git:git://github.com/crillab/jkahypar.git"
+                    developerConnection = "scm:git:ssh://github.com/crillab/jkahypar.git"
+                    url = "http://github.com/crillab/jkahypar"
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            credentials {
+                username = "$ossrhUsername"
+                password = "$ossrhPassword"
+            }
+
+            def releasesRepoUrl = "https://s01.oss.sonatype.org/content/repositories/releases/"
+            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = version.endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
 
 /*************
  * Functions *

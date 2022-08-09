@@ -25,6 +25,20 @@ the version **1.79.0** of Boost, which has been used to compile this library.
 If you use an unsupported OS or a different version of Boost, you may need to
 recompile the shared library, and rebuild JKaHyPar.
 
+## Adding JKaHyPar as a Dependency to your Project
+
+You may declare JKaHyPar as a dependency of your project using the following
+(for Maven-based projects):
+
+```xml
+<dependency>
+    <groupId>fr.cril</groupId>
+    <artifactId>jkahypar</artifactId>
+    <version>0.2.0</version>
+    <type>module</type>
+</dependency>
+```
+
 ## Building the Library
 
 This library is developed with [Gradle](https://gradle.org/).
