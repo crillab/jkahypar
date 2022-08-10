@@ -27,16 +27,22 @@ recompile the shared library, and rebuild JKaHyPar.
 
 ## Adding JKaHyPar as a Dependency to your Project
 
-You may declare JKaHyPar as a dependency of your project using the following
-(for Maven-based projects):
+The JKaHyPar library is available on
+[Maven Central](https://search.maven.org/artifact/fr.cril/jkahypar/0.2.0/jar).
+You may thus declare it as a dependency in your `pom.xml`, if you use Maven:
 
 ```xml
 <dependency>
     <groupId>fr.cril</groupId>
     <artifactId>jkahypar</artifactId>
     <version>0.2.0</version>
-    <type>module</type>
 </dependency>
+```
+
+or, if you use Gradle, in your `build.gradle` file:
+
+```groovy
+implementation "fr.cril:jkahypar:0.2.0"
 ```
 
 ## Building the Library
