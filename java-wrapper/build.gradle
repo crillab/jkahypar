@@ -185,8 +185,8 @@ publishing {
     repositories {
         maven {
             credentials {
-                username = "$ossrhUsername"
-                password = "$ossrhPassword"
+                username = project.hasProperty('ossrhUsername') ? "${ossrhUsername}" : ""
+                password = project.hasProperty('ossrhPassword') ? "${ossrhPassword}" : ""
             }
 
             def releasesRepoUrl = "https://s01.oss.sonatype.org/content/repositories/releases/"
