@@ -1,8 +1,5 @@
 # JKaHyPar
 
-[![Build Status](https://travis-ci.org/crillab/jkahypar.svg?branch=master)](https://travis-ci.org/crillab/jkahypar)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=crillab%3Ajkahypar&metric=alert_status)](https://sonarcloud.io/dashboard?id=crillab%3Ajkahypar)
-
 ## Description
 
 This project provides a Java binding for the [KaHyPar](https://kahypar.org/)
